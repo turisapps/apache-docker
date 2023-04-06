@@ -32,7 +32,8 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=raw,value=v0.0.1
+            type=raw,value=latest
+            type=sha,format=long
 
       - name: Build production image
         uses: docker/build-push-action@v3
