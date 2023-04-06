@@ -1,8 +1,6 @@
 name: Docker build and push.
 on:
   pull_request:
-    types:
-      - closed
     branches:
       - main
 
@@ -14,7 +12,6 @@ jobs:
   build:
     name: Docker image builds
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -38,6 +35,6 @@ jobs:
       - name: Build production image
         uses: docker/build-push-action@v3
         with:
-          push: true
+          push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
