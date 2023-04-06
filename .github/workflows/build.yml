@@ -35,6 +35,6 @@ jobs:
       - name: Build production image
         uses: docker/build-push-action@v3
         with:
-          push: ${{ github.event_name != 'pull_request' }}
+          push: ${{ github.event.pull_request.merged == true }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
