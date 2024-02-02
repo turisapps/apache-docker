@@ -1,5 +1,6 @@
 FROM php:5.6.40-apache
 
+COPY ./conf/mime.conf /etc/apache2/mods-available/mime.conf
 RUN apt-get update && apt-get install -y \
         apache2-dev \
         build-essential \
